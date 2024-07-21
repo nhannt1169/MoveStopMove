@@ -12,17 +12,21 @@ public class Player : Character
 
         if (rb.velocity != Vector3.zero)
         {
-            characterStatus = Utils.CharacterStatus.walking;
-            //ChangeAnim(Utils.animMove);
+            if (ChangeCharacterStatus(Utils.CharacterStatus.walking))
+            {
+                StopAllCoroutines();
+                ChangeAnim(Utils.animMove);
+            }
         }
         else
         {
             if (characterStatus != Utils.CharacterStatus.attacking && characterStatus != Utils.CharacterStatus.waiting)
             {
-                characterStatus = Utils.CharacterStatus.idle;
-                ChangeAnim(Utils.animIdle);
+                if (ChangeCharacterStatus(Utils.CharacterStatus.idle))
+                {
+                    ChangeAnim(Utils.animIdle);
+                }
             }
-
         }
     }
 

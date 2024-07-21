@@ -11,6 +11,12 @@ public class CanvasMainMenu : UICanvas
         LevelManager.instance.StartLevel((Utils.LevelIdx)dropdown.value);
     }
 
+    public void ShopButton()
+    {
+        Close(0);
+        UIManager.instance.OpenUI<CanvasShopSkin>();
+    }
+
     public void SettingsButton()
     {
         UIManager.instance.OpenUI<CanvasSettings>();

@@ -55,26 +55,18 @@ public class LevelManager : MonoBehaviour
     {
         player.ResetStatus();
         player.gameObject.SetActive(false);
-        DestroyBots();
 
         PoolManager.instance.DestroyAllPools();
+
+        BotManager.instance.ClearBots();
 
         currLevel.DestoyCurrLevel();
     }
 
     public void OnWin(Vector3 position)
     {
-        DestroyBots();
+        BotManager.instance.ClearBots();
         player.Win(position);
-    }
-
-    public void DestroyBots()
-    {
-        //foreach (Bot bot in bots)
-        //{
-        //    bot.ResetStatus();
-        //    bot.gameObject.SetActive(false);
-        //}
     }
 
     public void UpdateJoystick(Joystick joystick)

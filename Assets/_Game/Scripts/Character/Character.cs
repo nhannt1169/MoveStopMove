@@ -13,7 +13,7 @@ public class Character : GameUnit
     private string currentAnimName;
     private Weapon weapon;
     [SerializeField] private Transform weaponPos;
-    [SerializeField] private float range;
+    [SerializeField] protected float range;
     [SerializeField] private float size;
     [SerializeField] private AttackArea attackArea;
     protected CharacterStatus characterStatus;
@@ -26,6 +26,10 @@ public class Character : GameUnit
     {
         nameText.transform.LookAt(Camera.main.transform);
         nameText.transform.Rotate(nameOffset);
+        if (characterStatus == CharacterStatus.dead)
+        {
+            return;
+        }
         if (characterStatus == CharacterStatus.idle && targets.Count > 0)
         {
             Attack();
@@ -37,7 +41,7 @@ public class Character : GameUnit
         TF.position = position;
         if (weapon == null)
         {
-            weapon = WeaponManager.instance.weapons[3];
+            weapon = WeaponManager.instance.weapons[Random.Range(0, WeaponManager.instance.weapons.Length)];
         }
         targets = new List<Character>();
         SetWeapon(weapon);
@@ -47,12 +51,14 @@ public class Character : GameUnit
     public virtual void OnDeath()
     {
         ChangeAnim(Utils.animDie);
-        Invoke(nameof(OnDespawn), 1f);
-        gameObject.SetActive(false);
+        ChangeCharacterStatus(CharacterStatus.dead);
+        StopAllCoroutines();
+        Invoke(nameof(OnDespawn), 2f);
     }
 
     public virtual void OnDespawn()
     {
+        gameObject.SetActive(false);
     }
 
 
@@ -75,13 +81,23 @@ public class Character : GameUnit
     {
         if (currentAnimName != animName)
         {
-
             anim.ResetTrigger(currentAnimName);
 
             currentAnimName = animName;
 
             anim.SetTrigger(currentAnimName);
         }
+    }
+
+    protected bool ChangeCharacterStatus(Utils.CharacterStatus characterStatus)
+    {
+        if (this.characterStatus == CharacterStatus.dead)
+        {
+            return false;
+        }
+
+        this.characterStatus = characterStatus;
+        return true;
     }
 
     internal void AddTarget(Character target)
@@ -100,8 +116,7 @@ public class Character : GameUnit
         if (characterStatus != CharacterStatus.idle)
         {
             return;
-        }
-        ;
+        };
         Character chosen = null;
         foreach (Character target in targets)
         {
@@ -114,10 +129,13 @@ public class Character : GameUnit
 
         if (chosen == null) { return; }
 
-        TF.LookAt(chosen.TF);
-        characterStatus = CharacterStatus.attacking;
-        ChangeAnim(animThrow);
-        StartCoroutine(ThrowWeapon(chosen.TF));
+
+        if (ChangeCharacterStatus(CharacterStatus.attacking))
+        {
+            TF.LookAt(chosen.TF);
+            ChangeAnim(animThrow);
+            StartCoroutine(ThrowWeapon(chosen.TF));
+        }
     }
 
     //Spawn and start moving the throwable towards target
@@ -132,9 +150,10 @@ public class Character : GameUnit
                 Throwable throwable = (Throwable)ObjectPool.SpawnObject(attackPos.position, Quaternion.identity, weapon.poolType, null);
                 throwable.StartMoving(target, this);
             }
-
-            characterStatus = CharacterStatus.waiting;
-            Invoke(nameof(ResetAttackStatus), 3f);
+            if (ChangeCharacterStatus(CharacterStatus.waiting))
+            {
+                Invoke(nameof(ResetAttackStatus), 3f);
+            }
         }
         else
         {
@@ -145,12 +164,14 @@ public class Character : GameUnit
     protected void ResetAttackStatus()
     {
         StopAllCoroutines();
-        if (weapon != null)
-        {
-            weapon.gameObject.SetActive(true);
-        }
 
-        characterStatus = CharacterStatus.idle;
-        ChangeAnim(Utils.animIdle);
+        if (ChangeCharacterStatus(CharacterStatus.idle))
+        {
+            if (weapon != null)
+            {
+                weapon.gameObject.SetActive(true);
+            }
+            ChangeAnim(Utils.animIdle);
+        }
     }
 }
