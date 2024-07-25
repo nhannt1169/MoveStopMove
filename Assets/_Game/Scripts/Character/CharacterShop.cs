@@ -1,18 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterShop : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private MeshRenderer pantSkin;
+    [SerializeField] private Transform weaponPos;
+    private Weapon weapon;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

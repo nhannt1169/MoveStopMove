@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ThrowableScriptableObjectHammer
   m_EditorClassIdentifier: 
   weaponThrowType: 1
-  speed: 2
+  speed: 3

@@ -7,6 +7,8 @@ public class Throwable : GameUnit
     private bool isMoving = false;
     private Vector3 target;
     private Character owner;
+    private float timer = 0;
+    [SerializeField] private Collider collider;
 
     private void FixedUpdate()
     {
@@ -14,15 +16,21 @@ public class Throwable : GameUnit
         {
             transform.position = Vector3.MoveTowards(transform.position, target, throwableData.GetSpeed() * Time.fixedDeltaTime);
         }
+        timer += Time.fixedDeltaTime;
+
+        if (timer > 5f)
+        {
+            OnDespawn();
+        }
     }
 
     public void StartMoving(Transform target, Character owner)
     {
         this.target = new Vector3(target.position.x, 1, target.position.z);
-        //this.transform.LookAt(target.position);
         this.owner = owner;
         isMoving = true;
-        Invoke(nameof(OnDespawn), 5f);
+        timer = 0;
+        Physics.IgnoreCollision(collider, owner.GetCollider(), true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,8 +46,11 @@ public class Throwable : GameUnit
         }
     }
 
-    private void OnDespawn()
+    public void OnDespawn()
     {
+        Physics.IgnoreCollision(collider, owner.GetCollider(), false);
+        owner.RemoveThrowable(this);
         ObjectPool.DespawnObject(this, poolType);
+        timer = 0;
     }
 }

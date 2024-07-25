@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4657862991114143880}
   - component: {fileID: 7422702439227037863}
   - component: {fileID: 7643293844558746144}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bot
   m_TagString: Bot
   m_Icon: {fileID: 0}
@@ -161,8 +161,10 @@ MonoBehaviour:
   attackArea: {fileID: 445664580700023279}
   attackPos: {fileID: 4662380130351817539}
   nameText: {fileID: 8971568254991905443}
+  collider: {fileID: 7672346749497332767}
   agent: {fileID: 7643293844558746144}
   movementRange: 10
+  comeBackRange: 0
 --- !u!195 &7643293844558746144
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -556,6 +558,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: -8699012472884554006, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de30323f866aa2e4bba69ee4ab7baf28, type: 2}
     - target: {fileID: -8542655298583481684, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -720,6 +726,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: -529177695146175607, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de30323f866aa2e4bba69ee4ab7baf28, type: 2}
     - target: {fileID: 129350255495253916, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_Layer
       value: 6

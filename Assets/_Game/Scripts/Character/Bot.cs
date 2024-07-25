@@ -8,13 +8,8 @@ public class Bot : Character
     private ICharacterState currentState;
     [SerializeField] private float movementRange;
     private Vector3 destination;
+    [SerializeField] private float comeBackRange;
     public bool IsAtDestination => Vector3.Distance(TF.position, destination + (TF.position.y - destination.y) * Vector3.up) < 0.1f;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     protected override void Update()
@@ -67,8 +62,7 @@ public class Bot : Character
 
     public void FindTargetMovePoint()
     {
-        Vector3 target;
-        if (RandomPoint(this.TF.position, movementRange, out target))
+        if (RandomPoint(this.TF.position, movementRange, out Vector3 target))
         {
             Moving(target);
         }
@@ -77,28 +71,13 @@ public class Bot : Character
     private bool RandomPoint(Vector3 center, float movementRange, out Vector3 res)
     {
         Vector3 randomPoint = center + Random.insideUnitSphere * movementRange;
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 10.0f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 10.0f, NavMesh.AllAreas))
         {
             res = hit.position;
             return true;
         }
 
         res = Vector3.zero;
-        return false;
-    }
-
-    public bool CheckTargetsInRange()
-    {
-        foreach (var target in targets)
-        {
-            if (Vector3.Distance(TF.position, target.TF.position) <= range)
-            {
-                return true;
-            }
-        }
-
-        targets.Clear();
         return false;
     }
 }

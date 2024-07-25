@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ThrowableScriptableObjectBoomerang
   m_EditorClassIdentifier: 
   weaponThrowType: 2
-  speed: 2
+  speed: 3

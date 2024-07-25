@@ -21,12 +21,15 @@ public class Character : GameUnit
     [SerializeField] private Transform attackPos;
 
     [SerializeField] private TextMeshPro nameText;
-    private Vector3 nameOffset = new Vector3(0, 180, 0);
+    private Vector3 nameOffset = new(0, 180, 0);
+    public bool IsDead => characterStatus == CharacterStatus.dead;
+    private List<Throwable> throwables;
+    [SerializeField] private Collider collider;
     protected virtual void Update()
     {
         nameText.transform.LookAt(Camera.main.transform);
         nameText.transform.Rotate(nameOffset);
-        if (characterStatus == CharacterStatus.dead)
+        if (IsDead)
         {
             return;
         }
@@ -41,9 +44,10 @@ public class Character : GameUnit
         TF.position = position;
         if (weapon == null)
         {
-            weapon = WeaponManager.instance.weapons[Random.Range(0, WeaponManager.instance.weapons.Length)];
+            weapon = WeaponManager.instance.weapons[2];
         }
         targets = new List<Character>();
+        throwables = new List<Throwable>();
         SetWeapon(weapon);
         gameObject.SetActive(true);
     }
@@ -53,6 +57,10 @@ public class Character : GameUnit
         ChangeAnim(Utils.animDie);
         ChangeCharacterStatus(CharacterStatus.dead);
         StopAllCoroutines();
+        foreach (Throwable throwable in throwables.ToArray())
+        {
+            throwable.OnDespawn();
+        }
         Invoke(nameof(OnDespawn), 2f);
     }
 
@@ -77,29 +85,6 @@ public class Character : GameUnit
         this.weapon.gameObject.SetActive(true);
     }
 
-    protected void ChangeAnim(string animName)
-    {
-        if (currentAnimName != animName)
-        {
-            anim.ResetTrigger(currentAnimName);
-
-            currentAnimName = animName;
-
-            anim.SetTrigger(currentAnimName);
-        }
-    }
-
-    protected bool ChangeCharacterStatus(Utils.CharacterStatus characterStatus)
-    {
-        if (this.characterStatus == CharacterStatus.dead)
-        {
-            return false;
-        }
-
-        this.characterStatus = characterStatus;
-        return true;
-    }
-
     internal void AddTarget(Character target)
     {
         targets.Add(target);
@@ -110,6 +95,37 @@ public class Character : GameUnit
         targets.Remove(target);
     }
 
+    public Collider GetCollider()
+    {
+        return collider;
+    }
+
+    protected void ChangeAnim(string animName)
+    {
+        if (currentAnimName != animName)
+        {
+            if (currentAnimName != null)
+            {
+                anim.ResetTrigger(currentAnimName);
+            }
+
+            currentAnimName = animName;
+
+            anim.SetTrigger(currentAnimName);
+        }
+    }
+
+    protected bool ChangeCharacterStatus(Utils.CharacterStatus characterStatus)
+    {
+        if (IsDead)
+        {
+            return false;
+        }
+
+        this.characterStatus = characterStatus;
+        return true;
+    }
+
     //Start the attack process
     protected void Attack()
     {
@@ -117,24 +133,25 @@ public class Character : GameUnit
         {
             return;
         };
-        Character chosen = null;
-        foreach (Character target in targets)
-        {
-            if (target.isActiveAndEnabled)
-            {
-                chosen = target;
-                break;
-            }
-        }
-
-        if (chosen == null) { return; }
-
 
         if (ChangeCharacterStatus(CharacterStatus.attacking))
         {
-            TF.LookAt(chosen.TF);
+            Transform chosen = null;
+            foreach (Character target in targets)
+            {
+                if (target.isActiveAndEnabled)
+                {
+                    chosen = target.TF;
+                    break;
+                }
+            }
+
+            if (chosen == null) { return; }
+
+
+            TF.LookAt(chosen);
             ChangeAnim(animThrow);
-            StartCoroutine(ThrowWeapon(chosen.TF));
+            StartCoroutine(ThrowWeapon(chosen));
         }
     }
 
@@ -149,6 +166,7 @@ public class Character : GameUnit
                 weapon.gameObject.SetActive(false);
                 Throwable throwable = (Throwable)ObjectPool.SpawnObject(attackPos.position, Quaternion.identity, weapon.poolType, null);
                 throwable.StartMoving(target, this);
+                throwables.Add(throwable);
             }
             if (ChangeCharacterStatus(CharacterStatus.waiting))
             {
@@ -173,5 +191,24 @@ public class Character : GameUnit
             }
             ChangeAnim(Utils.animIdle);
         }
+    }
+
+    public void RemoveThrowable(Throwable throwable)
+    {
+        throwables.Remove(throwable);
+    }
+
+    public bool CheckTargetsInRange()
+    {
+        foreach (var target in targets)
+        {
+            if (Vector3.Distance(TF.position, target.TF.position) <= range && !target.IsDead)
+            {
+                return true;
+            }
+        }
+
+        targets.Clear();
+        return false;
     }
 }

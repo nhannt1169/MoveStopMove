@@ -5,7 +5,7 @@ public static class Utils
     public enum PoolType { throwable_axe = 0, throwable_boomerang = 1, throwable_dagger = 2, throwable_hammer = 3 };
 
     public static string animIdle = "IsIdle";
-    public static string animMove = "";
+    public static string animMove = "IsMove";
     public static string animJump = "jump";
     public static string animThrow = "IsAttack";
     public static string animDie = "IsDead";
