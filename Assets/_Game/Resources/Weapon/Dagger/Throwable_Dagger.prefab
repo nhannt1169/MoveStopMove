@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9147104473537348230}
   - component: {fileID: 8601550495868989193}
   - component: {fileID: 263995258428721769}
-  - component: {fileID: 3171172076853326510}
   m_Layer: 0
   m_Name: Throwable_Dagger
   m_TagString: Untagged
@@ -26,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269673420125617568}
-  m_LocalRotation: {x: 0.7071068, y: -0.7071068, z: 0, w: 0}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: -0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7269642053052689059}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 180, y: -90, z: 90}
 --- !u!33 &8601550495868989193
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -85,29 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3171172076853326510
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 269673420125617568}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.0021258353
-  m_Height: 0.023034047
-  m_Direction: 1
-  m_Center: {x: -0.0000026705675, y: -0.00003497163, z: 0}
 --- !u!1 &1958456250613393218
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7269642053052689059}
   - component: {fileID: 5154239901650854424}
+  - component: {fileID: 3429698362580027219}
   m_Layer: 0
   m_Name: Throwable_Dagger
   m_TagString: Untagged
@@ -139,7 +116,7 @@ Transform:
   m_Children:
   - {fileID: 9147104473537348230}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5154239901650854424
 MonoBehaviour:
@@ -155,4 +132,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwableData: {fileID: 11400000, guid: aa08c7ba92a1b51488772099cfafb189, type: 2}
   poolType: 2
-  collider: {fileID: 3171172076853326510}
+  collider: {fileID: 3429698362580027219}
+--- !u!65 &3429698362580027219
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958456250613393218}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.44, y: 0.05, z: 0.04}
+  m_Center: {x: 0, y: 0, z: 0}

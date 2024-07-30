@@ -4,15 +4,10 @@ using TMPro;
 using UnityEngine;
 using static Utils;
 
-public class Character : GameUnit
+public class Character : CharacterVisual
 {
     //[SerializeField] ColorData colorData;
-    [SerializeField] Animator anim;
     private Utils.PoolType weaponPoolType;
-    [SerializeField] protected Rigidbody rb;
-    private string currentAnimName;
-    private Weapon weapon;
-    [SerializeField] private Transform weaponPos;
     [SerializeField] protected float range;
     [SerializeField] private float size;
     [SerializeField] private AttackArea attackArea;
@@ -27,8 +22,12 @@ public class Character : GameUnit
     [SerializeField] private Collider collider;
     protected virtual void Update()
     {
-        nameText.transform.LookAt(Camera.main.transform);
-        nameText.transform.Rotate(nameOffset);
+        if (nameText != null)
+        {
+            nameText.transform.LookAt(Camera.main.transform);
+            nameText.transform.Rotate(nameOffset);
+        }
+
         if (IsDead)
         {
             return;
@@ -75,16 +74,6 @@ public class Character : GameUnit
 
     }
 
-    public void SetWeapon(Weapon weapon)
-    {
-        if (this.weapon != null)
-        {
-            Destroy(this.weapon);
-        }
-        this.weapon = Instantiate(weapon, weaponPos);
-        this.weapon.gameObject.SetActive(true);
-    }
-
     internal void AddTarget(Character target)
     {
         targets.Add(target);
@@ -98,21 +87,6 @@ public class Character : GameUnit
     public Collider GetCollider()
     {
         return collider;
-    }
-
-    protected void ChangeAnim(string animName)
-    {
-        if (currentAnimName != animName)
-        {
-            if (currentAnimName != null)
-            {
-                anim.ResetTrigger(currentAnimName);
-            }
-
-            currentAnimName = animName;
-
-            anim.SetTrigger(currentAnimName);
-        }
     }
 
     protected bool ChangeCharacterStatus(Utils.CharacterStatus characterStatus)
@@ -164,7 +138,7 @@ public class Character : GameUnit
             if (weapon != null)
             {
                 weapon.gameObject.SetActive(false);
-                Throwable throwable = (Throwable)ObjectPool.SpawnObject(attackPos.position, Quaternion.identity, weapon.poolType, null);
+                Throwable throwable = (Throwable)ObjectPool.SpawnObject(attackPos.position, this.transform.rotation, weapon.poolType, null);
                 throwable.StartMoving(target, this);
                 throwables.Add(throwable);
             }

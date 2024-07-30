@@ -9,7 +9,10 @@ public class Bot : Character
     [SerializeField] private float movementRange;
     private Vector3 destination;
     [SerializeField] private float comeBackRange;
+    [SerializeField] private Transform playerTF;
     public bool IsAtDestination => Vector3.Distance(TF.position, destination + (TF.position.y - destination.y) * Vector3.up) < 0.1f;
+
+    //public bool IsCloseToPlayer => Vector3.Distance(TF.position, playerTF.position) < 10f;
 
     // Update is called once per frame
     protected override void Update()
@@ -60,8 +63,13 @@ public class Bot : Character
         ChangeState(new IdleState());
     }
 
-    public void FindTargetMovePoint()
+    public void FindTargetMovePoint(bool moveTowardsPlayer = false)
     {
+        //if (moveTowardsPlayer)
+        //{
+        //    Moving(playerTF.position);
+        //}
+        //else 
         if (RandomPoint(this.TF.position, movementRange, out Vector3 target))
         {
             Moving(target);

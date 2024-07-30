@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5030037608888419157}
   - component: {fileID: 176788391421090930}
+  - component: {fileID: 718692193779862708}
   m_Layer: 0
   m_Name: Throwable_Axe
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 7245265882147244336}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &176788391421090930
 MonoBehaviour:
@@ -47,7 +48,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwableData: {fileID: 11400000, guid: 55dfb0f973f80604988c916edb9490e1, type: 2}
   poolType: 0
-  collider: {fileID: 8985600522276087750}
+  collider: {fileID: 718692193779862708}
+--- !u!65 &718692193779862708
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2220443456474277054}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.62, y: 0.05, z: 0.18}
+  m_Center: {x: -0.0017584036, y: -0.00032185623, z: 0}
 --- !u!1 &7028283797347445703
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +81,6 @@ GameObject:
   - component: {fileID: 7245265882147244336}
   - component: {fileID: 2475937029181904662}
   - component: {fileID: 2954714519885147291}
-  - component: {fileID: 8985600522276087750}
   m_Layer: 0
   m_Name: Throwable_Axe
   m_TagString: Untagged
@@ -74,14 +95,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7028283797347445703}
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: -0.70710677, z: 0.70710677, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 25, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5030037608888419157}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 90}
 --- !u!33 &2475937029181904662
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -133,26 +154,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8985600522276087750
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7028283797347445703}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.007224388
-  m_Height: 0.02482298
-  m_Direction: 1
-  m_Center: {x: -0.0017584036, y: -0.00032185623, z: 0}

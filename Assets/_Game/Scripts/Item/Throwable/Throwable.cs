@@ -14,7 +14,7 @@ public class Throwable : GameUnit
     {
         if (isMoving)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, throwableData.GetSpeed() * Time.fixedDeltaTime);
+            transform.Translate(Vector3.forward * Time.fixedDeltaTime * throwableData.GetSpeed());
         }
         timer += Time.fixedDeltaTime;
 

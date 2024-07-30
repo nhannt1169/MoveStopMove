@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9127359675250651328}
   - component: {fileID: 4905733536133592791}
   - component: {fileID: 8493825948362221486}
-  - component: {fileID: 9160390064039998288}
   m_Layer: 0
   m_Name: Weapon_Hammer
   m_TagString: Untagged
@@ -26,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2635338795274943551}
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: -0.70710677, z: 0.70710677, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 20, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1201955371962703554}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 90}
 --- !u!33 &4905733536133592791
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -85,29 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &9160390064039998288
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2635338795274943551}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.0063314247
-  m_Height: 0.025129154
-  m_Direction: 1
-  m_Center: {x: 0.000058174133, y: -0.0006495784, z: 0}
 --- !u!1 &5374566652670415421
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1201955371962703554}
   - component: {fileID: -4813651620394567598}
+  - component: {fileID: 6365469440965517781}
   m_Layer: 0
   m_Name: Throwable_Hammer
   m_TagString: Untagged
@@ -155,4 +132,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwableData: {fileID: 11400000, guid: 71f7cb17884051c46b1cfbb64befd8ca, type: 2}
   poolType: 3
-  collider: {fileID: 9160390064039998288}
+  collider: {fileID: 6365469440965517781}
+--- !u!65 &6365469440965517781
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5374566652670415421}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.03, z: 0.15}
+  m_Center: {x: 0.01, y: 0, z: 0}

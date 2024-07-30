@@ -8,13 +8,15 @@ public class CanvasMainMenu : UICanvas
     {
         Close(0);
         UIManager.instance.OpenUI<CanvasGameplay>();
+        CameraManager.instance.ChangeUICamStatus(false);
         LevelManager.instance.StartLevel((Utils.LevelIdx)dropdown.value);
     }
 
     public void ShopButton()
     {
         Close(0);
-        UIManager.instance.OpenUI<CanvasShopSkin>();
+        CameraManager.instance.ChangeUICamStatus(true);
+        UIManager.instance.OpenUI<CanvasShop>();
     }
 
     public void SettingsButton()
