@@ -41,13 +41,17 @@ public class Character : CharacterVisual
     public virtual void OnInit(Vector3 position, Weapon weapon = null)
     {
         TF.position = position;
-        if (weapon == null)
+        if (weapon == null && this.weapon == null)
         {
-            weapon = WeaponManager.instance.weapons[2];
+            weapon = WeaponManager.instance.weapons[0];
         }
         targets = new List<Character>();
         throwables = new List<Throwable>();
-        SetWeapon(weapon);
+        if (weapon != null)
+        {
+            SetWeapon(weapon);
+        }
+
         gameObject.SetActive(true);
     }
 

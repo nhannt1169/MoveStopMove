@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class IdleState : ICharacterState
 {
-    float timeLimit = 2f;
+    float timeLimit = 1f;
     float timer;
     public void IStart(Bot bot)
     {

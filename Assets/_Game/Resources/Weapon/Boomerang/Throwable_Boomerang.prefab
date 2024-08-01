@@ -49,6 +49,7 @@ MonoBehaviour:
   throwableData: {fileID: 11400000, guid: 9a3813d5e009bfa4eb35e2b63a654a8d, type: 2}
   poolType: 1
   collider: {fileID: 6972105846315580823}
+  throwableModel: {fileID: 3261980570242496460}
 --- !u!65 &6972105846315580823
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -68,8 +69,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.52, y: 0.06, z: 0.24}
-  m_Center: {x: 0, y: 0, z: 0.12}
+  m_Size: {x: 0.35, y: 0.06, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2647339465780884839
 GameObject:
   m_ObjectHideFlags: 0

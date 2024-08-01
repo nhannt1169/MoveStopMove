@@ -5,16 +5,21 @@ public class Throwable : GameUnit
     [SerializeField] private ThrowableScriptableObject throwableData;
     public Utils.PoolType poolType;
     private bool isMoving = false;
-    private Vector3 target;
     private Character owner;
     private float timer = 0;
     [SerializeField] private Collider collider;
+    [SerializeField] private Transform throwableModel;
 
     private void FixedUpdate()
     {
         if (isMoving)
         {
-            transform.Translate(Vector3.forward * Time.fixedDeltaTime * throwableData.GetSpeed());
+            transform.Translate(throwableData.GetSpeed() * Time.fixedDeltaTime * Vector3.forward);
+        }
+
+        if (throwableData.GetWeaponThrowType() == Utils.WeaponThrowType.spinning)
+        {
+            throwableModel.transform.Rotate(0, 20 * Time.fixedDeltaTime, 0);
         }
         timer += Time.fixedDeltaTime;
 
@@ -26,7 +31,6 @@ public class Throwable : GameUnit
 
     public void StartMoving(Transform target, Character owner)
     {
-        this.target = new Vector3(target.position.x, 1, target.position.z);
         this.owner = owner;
         isMoving = true;
         timer = 0;

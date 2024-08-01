@@ -6,7 +6,7 @@ public class CanvasGameplay : UICanvas
 
     private void Start()
     {
-        LevelManager.instance.UpdateJoystick(joystick);
+        GameManager.instance.UpdateJoystick(joystick);
     }
 
     public void SettingsButton()

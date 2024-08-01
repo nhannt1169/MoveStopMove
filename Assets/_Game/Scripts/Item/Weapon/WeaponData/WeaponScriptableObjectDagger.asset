@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af87efd3788c5a749b89544352da334b, type: 3}
   m_Name: WeaponScriptableObjectDagger
   m_EditorClassIdentifier: 
-  weaponName: Knife
+  weaponName: Dagger
   price: 10
-  weaponThrowType: 0

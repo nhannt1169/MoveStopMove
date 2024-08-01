@@ -5,7 +5,6 @@ using static Utils;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
-    [SerializeField] Player player;
     private Dictionary<LevelIdx, Level> levels = new();
 
 
@@ -46,15 +45,15 @@ public class LevelManager : MonoBehaviour
 
         //Create player and bots
 
-        player.OnInit(currLevel.charPositions[0].position);
+        GameManager.instance.GetPlayer().OnInit(currLevel.charPositions[0].position);
 
         BotManager.instance.InitBots(currLevel.charPositions);
     }
 
     public void DestroyCurrLevel()
     {
-        player.ResetStatus();
-        player.gameObject.SetActive(false);
+        GameManager.instance.GetPlayer().ResetStatus();
+        GameManager.instance.GetPlayer().gameObject.SetActive(false);
 
         PoolManager.instance.DestroyAllPools();
 
@@ -66,11 +65,6 @@ public class LevelManager : MonoBehaviour
     public void OnWin(Vector3 position)
     {
         BotManager.instance.ClearBots();
-        player.Win(position);
-    }
-
-    public void UpdateJoystick(Joystick joystick)
-    {
-        player.SetJoystick(joystick);
+        GameManager.instance.GetPlayer().Win(position);
     }
 }

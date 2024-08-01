@@ -1,3 +1,3 @@
-public class CanvasLost : UICanvas
+public class CanvasDefeat : UICanvas
 {
 }
