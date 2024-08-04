@@ -162,6 +162,8 @@ MonoBehaviour:
   attackPos: {fileID: 4662380130351817539}
   nameText: {fileID: 8971568254991905443}
   collider: {fileID: 7672346749497332767}
+  pantsMesh: {fileID: 4103757200680415095}
+  headPos: {fileID: 798973084137439126}
   agent: {fileID: 7643293844558746144}
   movementRange: 10
   comeBackRange: 0
@@ -877,9 +879,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
   m_PrefabInstance: {fileID: 4635473809934220542}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &798973084137439126 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3800467336962686104, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 4635473809934220542}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1376872949424197767 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3220319501169496967, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 4635473809934220542}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4103757200680415095 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -529177695146175607, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
   m_PrefabInstance: {fileID: 4635473809934220542}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &7756383633783159454 stripped

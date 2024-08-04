@@ -68,4 +68,11 @@ public class Player : Character
         rb.AddForce(20f * Vector3.up);
         ChangeAnim(Utils.animJump);
     }
+
+    public override void EarnCoinIfPlayer()
+    {
+        base.EarnCoinIfPlayer();
+        DataManager.instance.GetCurrentData().userData.coins += 10;
+        DataManager.instance.SaveToJson();
+    }
 }

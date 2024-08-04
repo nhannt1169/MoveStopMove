@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Throwable : GameUnit
 {
-    [SerializeField] private ThrowableScriptableObject throwableData;
+    [SerializeField] private ScriptableObjectThrowable throwableData;
     public Utils.PoolType poolType;
     private bool isMoving = false;
     private Character owner;
@@ -46,6 +46,7 @@ public class Throwable : GameUnit
                 OnDespawn();
                 target.OnDeath();
                 owner.RemoveTarget(target);
+                owner.EarnCoinIfPlayer();
             }
         }
     }

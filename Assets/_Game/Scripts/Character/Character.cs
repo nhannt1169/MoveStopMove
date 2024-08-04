@@ -20,6 +20,7 @@ public class Character : CharacterVisual
     public bool IsDead => characterStatus == CharacterStatus.dead;
     private List<Throwable> throwables;
     [SerializeField] private Collider collider;
+
     protected virtual void Update()
     {
         if (nameText != null)
@@ -43,9 +44,10 @@ public class Character : CharacterVisual
         TF.position = position;
         if (weapon == null && this.weapon == null)
         {
-            weapon = WeaponManager.instance.weapons[0];
+            weapon = ItemManager.instance.weapons[0];
         }
-        targets = new List<Character>();
+        //targets = new List<Character>();
+        targets.Clear();
         throwables = new List<Throwable>();
         if (weapon != null)
         {
@@ -137,14 +139,13 @@ public class Character : CharacterVisual
     protected IEnumerator ThrowWeapon(Transform target)
     {
         yield return new WaitForSeconds(0.5f);
+
         if (characterStatus == CharacterStatus.attacking)
         {
             if (weapon != null)
             {
+                throwables.Add(weapon.Shoot(attackPos, target, this, this.transform.rotation));
                 weapon.gameObject.SetActive(false);
-                Throwable throwable = (Throwable)ObjectPool.SpawnObject(attackPos.position, this.transform.rotation, weapon.poolType, null);
-                throwable.StartMoving(target, this);
-                throwables.Add(throwable);
             }
             if (ChangeCharacterStatus(CharacterStatus.waiting))
             {
@@ -188,5 +189,10 @@ public class Character : CharacterVisual
 
         targets.Clear();
         return false;
+    }
+
+    public virtual void EarnCoinIfPlayer()
+    {
+
     }
 }

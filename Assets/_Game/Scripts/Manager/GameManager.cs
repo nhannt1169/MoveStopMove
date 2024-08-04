@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        DataManager dataManager = new DataManager();
+        DataManager dataManager = new();
         dataManager.OnInit();
     }
 

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class DataManager
@@ -6,18 +8,19 @@ public class DataManager
     public static DataManager instance;
     string filePath = Application.persistentDataPath + "/save.json";
     public PlayerData currData;
+    public bool isNeededInit = false;
     public void OnInit()
     {
         if (!LoadFromJson())
         {
-            currData = new PlayerData(new PlayerDataWeapon(), new PlayerDataUser());
+            currData = new PlayerData(new PlayerDataWeapon(), new PlayerDataHair(), new PlayerDataUser());
+            isNeededInit = true;
         }
         instance = this;
     }
     public void SaveToJson()
     {
-        currData ??= new PlayerData(new PlayerDataWeapon(), new PlayerDataUser());
-        Debug.Log(filePath);
+        currData ??= new PlayerData(new PlayerDataWeapon(), new PlayerDataHair(), new PlayerDataUser());
         string data = JsonUtility.ToJson(currData);
         System.IO.File.WriteAllText(filePath, data);
     }
@@ -30,9 +33,14 @@ public class DataManager
             currData = JsonUtility.FromJson<PlayerData>(data);
             return true;
         }
+        catch (FileNotFoundException e)
+        {
+            Debug.LogWarning("Error: " + e.Message);
+            return false;
+        }
         catch (Exception e)
         {
-            Debug.LogError("Error: " + e.Message);
+            Debug.LogError(e.Message);
             return false;
         }
     }
@@ -47,27 +55,58 @@ public class DataManager
 public class PlayerData
 {
     public PlayerDataWeapon weaponData;
+    public PlayerDataHair hairData;
     public PlayerDataUser userData;
 
-    public PlayerData(PlayerDataWeapon saveDataWeapon, PlayerDataUser saveDataUser)
+    public int currentWeaponID;
+
+    public PlayerData(PlayerDataWeapon weaponData, PlayerDataHair hairData, PlayerDataUser userData)
     {
-        this.weaponData = saveDataWeapon;
-        this.userData = saveDataUser;
+        this.weaponData = weaponData;
+        this.hairData = hairData;
+        this.userData = userData;
     }
 }
 
 [Serializable]
 public class PlayerDataWeapon
 {
-    public bool weapon_00_bought = false;
-    public bool weapon_01_bought = false;
-    public bool weapon_02_bought = false;
-    public bool weapon_03_bought = false;
+    public List<WeaponData> weaponData = new();
+}
+
+[Serializable]
+public class WeaponData
+{
+    public string name;
+    public bool isOwned;
+    public WeaponData(string name, bool isOwned)
+    {
+        this.name = name;
+        this.isOwned = isOwned;
+    }
+}
+
+[Serializable]
+public class PlayerDataHair
+{
+    public List<HairData> hairData = new();
+}
+
+[Serializable]
+public class HairData
+{
+    public string name;
+    public bool isOwned;
+    public HairData(string name, bool isOwned)
+    {
+        this.name = name;
+        this.isOwned = isOwned;
+    }
 }
 
 [Serializable]
 public class PlayerDataUser
 {
-    public int coins = 0;
+    public float coins = 0;
 }
 

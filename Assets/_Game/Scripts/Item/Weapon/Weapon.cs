@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private WeaponScriptableObject weaponData;
+    [SerializeField] private ScriptableObjectWeapon weaponData;
     public Utils.PoolType poolType;
     public int weaponIdx;
 
@@ -11,9 +11,15 @@ public class Weapon : MonoBehaviour
         return weaponData.GetWeaponName();
     }
 
-    public float GetWeaponPrice()
+    public float GetPrice()
     {
-        return weaponData.GetWeaponPrice();
+        return weaponData.GetPrice();
     }
 
+    internal Throwable Shoot(Transform attackPos, Transform target, Character owner, Quaternion rotation)
+    {
+        Throwable throwable = (Throwable)ObjectPool.SpawnObject(attackPos.position, rotation, poolType, null);
+        throwable.StartMoving(target, owner);
+        return throwable;
+    }
 }

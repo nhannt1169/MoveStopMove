@@ -1,8 +1,8 @@
 using UnityEngine;
 using static Utils;
 
-[CreateAssetMenu(fileName = "ThrowableScriptableObject")]
-public class ThrowableScriptableObject : ScriptableObject
+[CreateAssetMenu(fileName = "ScriptableObjectThrowable")]
+public class ScriptableObjectThrowable : ScriptableObject
 {
     [SerializeField] private WeaponThrowType weaponThrowType;
     [Range(1f, 10f)]

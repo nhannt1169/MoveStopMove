@@ -15,4 +15,5 @@ public static class Utils
     public enum WeaponThrowType { straight = 0, spinning = 1, returning = 2 }
     public enum CharacterStatus { idle = 0, attacking = 1, waiting = 2, walking = 3, dead = 4 }
 
+    public static string errorNotEnoughMoney = "Insufficient coins!";
 }

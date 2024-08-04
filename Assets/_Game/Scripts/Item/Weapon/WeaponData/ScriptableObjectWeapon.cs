@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WeaponScriptableObject")]
-public class WeaponScriptableObject : ScriptableObject
+[CreateAssetMenu(fileName = "ScriptableObjectWeapon")]
+public class ScriptableObjectWeapon : ScriptableObject
 {
     [SerializeField] private string weaponName;
     [SerializeField] private float price;
@@ -11,7 +11,7 @@ public class WeaponScriptableObject : ScriptableObject
         return weaponName;
     }
 
-    public float GetWeaponPrice()
+    public float GetPrice()
     {
         return price;
     }
