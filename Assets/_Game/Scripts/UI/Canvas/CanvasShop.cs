@@ -153,7 +153,7 @@ public class CanvasShop : UICanvas
             coinText.text = DataManager.instance.currData.userData.coins + " Coins";
             hairPanel.UpdateAllItemStatus();
         }
-        else
+        else if (chosenPants != null)
         {
             var currData = DataManager.instance.GetCurrentData();
 

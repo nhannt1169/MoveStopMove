@@ -22,12 +22,22 @@ public class BotManager : MonoBehaviour
         }
     }
 
+    public void RemoveBot(Bot bot)
+    {
+        bots.Remove(bot);
+    }
+
     public void ClearBots()
     {
         foreach (Bot bot in bots)
         {
             Destroy(bot);
         }
-        bots = new();
+        bots.Clear();
+    }
+
+    public int GetBotCount()
+    {
+        return bots.Count;
     }
 }

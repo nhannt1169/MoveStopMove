@@ -11,13 +11,18 @@ public class CanvasGameplay : UICanvas
         GameManager.instance.UpdateJoystick(joystick);
     }
 
+    private void Update()
+    {
+        UpdateSurviorCount();
+    }
+
     public void SettingsButton()
     {
         UIManager.instance.OpenUI<CanvasSettings>();
     }
 
-    public void UpdateSurviorCount(int num)
+    public void UpdateSurviorCount()
     {
-        survivorCountText.text = "Alive: " + num.ToString();
+        survivorCountText.text = "Surviors: " + (BotManager.instance.GetBotCount() + 1).ToString();
     }
 }

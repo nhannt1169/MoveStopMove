@@ -9,6 +9,7 @@ public class Bot : Character
     [SerializeField] private float movementRange;
     private Vector3 destination;
     public bool IsAtDestination => Vector3.Distance(TF.position, destination + (TF.position.y - destination.y) * Vector3.up) < 0.1f;
+    //[SerializeField] private Indicator
 
     protected override void Update()
     {
@@ -82,5 +83,21 @@ public class Bot : Character
 
         res = Vector3.zero;
         return false;
+    }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        BotManager.instance.RemoveBot(this);
+    }
+
+    private void OnBecameInvisible()
+    {
+        Debug.Log("here");
+    }
+
+    private void OnBecameVisible()
+    {
+
     }
 }

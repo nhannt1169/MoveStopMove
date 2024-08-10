@@ -40,7 +40,7 @@ public class PanelItem : MonoBehaviour, IDragHandler, IEndDragHandler
     public void Open()
     {
         gameObject.SetActive(true);
-        transform.position = panelPosition;
+        //transform.position = panelPosition;
     }
 
     public void Close()
@@ -50,9 +50,7 @@ public class PanelItem : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log(panelPosition.x + "-" + panelPosition.y + "-" + panelPosition.z);
         difference = difference + (eventData.pressPosition.x - eventData.position.x) / 1000;
-        //Debug.Log(difference);
         transform.position = new Vector3(panelPosition.x - difference, panelPosition.y, panelPosition.z);
     }
 

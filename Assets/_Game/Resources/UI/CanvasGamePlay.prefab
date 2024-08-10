@@ -369,7 +369,7 @@ RectTransform:
   - {fileID: 1780085732405909626}
   - {fileID: 6542085540046309516}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnClose: 0
   joystick: {fileID: 6542085540046309513}
-  survivorCountText: {fileID: 0}
+  survivorCountText: {fileID: 7324884140478553057}
 --- !u!1001 &3145799202773218952
 PrefabInstance:
   m_ObjectHideFlags: 0
