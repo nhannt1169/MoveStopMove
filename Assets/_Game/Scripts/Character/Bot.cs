@@ -8,13 +8,8 @@ public class Bot : Character
     private ICharacterState currentState;
     [SerializeField] private float movementRange;
     private Vector3 destination;
-    [SerializeField] private float comeBackRange;
-    [SerializeField] private Transform playerTF;
     public bool IsAtDestination => Vector3.Distance(TF.position, destination + (TF.position.y - destination.y) * Vector3.up) < 0.1f;
 
-    //public bool IsCloseToPlayer => Vector3.Distance(TF.position, playerTF.position) < 10f;
-
-    // Update is called once per frame
     protected override void Update()
     {
         base.Update();
@@ -57,19 +52,19 @@ public class Bot : Character
         //agent.SetDestination(Vector3.zero);
     }
 
-    public override void OnInit(Vector3 position, Weapon weapon = null)
+    public override void OnInit(Vector3 position)
     {
-        base.OnInit(position, weapon);
+        base.OnInit(position);
         ChangeState(new IdleState());
     }
 
-    public void FindTargetMovePoint(bool moveTowardsPlayer = false)
+    public void FindTargetMovePoint(Vector3? targetMovePoint = null)
     {
-        //if (moveTowardsPlayer)
-        //{
-        //    Moving(playerTF.position);
-        //}
-        //else 
+        if (targetMovePoint != null)
+        {
+            Moving((Vector3)targetMovePoint);
+        }
+        else
         if (RandomPoint(this.TF.position, movementRange, out Vector3 target))
         {
             Moving(target);

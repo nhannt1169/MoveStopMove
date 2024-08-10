@@ -11,9 +11,12 @@ public static class Utils
     public static string animDie = "IsDead";
 
     public enum LevelIdx { level1 = 0, level2 = 1, level3 = 2 }
+    public enum ItemStatus { locked = 0, unlocked = 1, equipped = 2 };
 
     public enum WeaponThrowType { straight = 0, spinning = 1, returning = 2 }
     public enum CharacterStatus { idle = 0, attacking = 1, waiting = 2, walking = 3, dead = 4 }
 
     public static string errorNotEnoughMoney = "Insufficient coins!";
+
+    public enum ItemType { weapon = 0, hair = 1, pants = 2 }
 }

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class IdleState : ICharacterState
 {
-    float timeLimit = 1f;
-    float timer;
+    private float timeLimit = 1f;
+    private float timer;
     public void IStart(Bot bot)
     {
         bot.Stopping();

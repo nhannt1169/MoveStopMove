@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be6c2e6da70f1241952ec9ec71c9ec4, type: 3}
+  m_Name: ScriptableObjectItemStatus
+  m_EditorClassIdentifier: 
+  statusTextures:
+  - {fileID: 2800000, guid: 81b4f78c0fe92394f944903af19b648e, type: 3}
+  - {fileID: 2800000, guid: 7a00120a370585647a5d4be68e4a641b, type: 3}
+  - {fileID: 2800000, guid: e2b17d19f4b17c544b2649a6f957cf7a, type: 3}

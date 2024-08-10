@@ -6,18 +6,24 @@ public class ItemManager : MonoBehaviour
     public Weapon[] weapons;
     public Throwable[] throwables;
     public Hair[] hairs;
+    public Pants[] pants;
 
     private void Awake()
     {
         instance = this;
         for (int i = 0; i < weapons.Length; i++)
         {
-            weapons[i].weaponIdx = i;
+            weapons[i].itemIdx = i;
         }
 
         for (int i = 0; i < hairs.Length; i++)
         {
-            hairs[i].hairIdx = i;
+            hairs[i].itemIdx = i;
+        }
+
+        for (int i = 0; i < pants.Length; i++)
+        {
+            pants[i].itemIdx = i;
         }
 
         if (DataManager.instance.isNeededInit)
@@ -30,12 +36,17 @@ public class ItemManager : MonoBehaviour
     {
         for (int i = 0; i < weapons.Length; i++)
         {
-            data.weaponData.weaponData.Add(new WeaponData(weapons[i].GetWeaponName(), false));
+            data.weaponData.weaponData.Add(new WeaponData(weapons[i].GetItemName(), false));
         }
 
         for (int i = 0; i < hairs.Length; i++)
         {
-            data.hairData.hairData.Add(new HairData(hairs[i].GetHairName(), false));
+            data.hairData.hairData.Add(new HairData(hairs[i].GetItemName(), false));
+        }
+
+        for (int i = 0; i < pants.Length; i++)
+        {
+            data.pantsData.pantsData.Add(new PantsData(pants[i].GetItemName(), false));
         }
 
         DataManager.instance.SaveToJson();

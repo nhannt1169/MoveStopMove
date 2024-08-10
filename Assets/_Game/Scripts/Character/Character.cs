@@ -10,9 +10,11 @@ public class Character : CharacterVisual
     private Utils.PoolType weaponPoolType;
     [SerializeField] protected float range;
     [SerializeField] private float size;
-    [SerializeField] private AttackArea attackArea;
+
     protected CharacterStatus characterStatus;
     protected List<Character> targets = new();
+    protected Character pursuitTarget = null;
+
     [SerializeField] private Transform attackPos;
 
     [SerializeField] private TextMeshPro nameText;
@@ -20,6 +22,7 @@ public class Character : CharacterVisual
     public bool IsDead => characterStatus == CharacterStatus.dead;
     private List<Throwable> throwables;
     [SerializeField] private Collider collider;
+
 
     protected virtual void Update()
     {
@@ -39,19 +42,15 @@ public class Character : CharacterVisual
         }
     }
 
-    public virtual void OnInit(Vector3 position, Weapon weapon = null)
+    public virtual void OnInit(Vector3 position)
     {
         TF.position = position;
-        if (weapon == null && this.weapon == null)
-        {
-            weapon = ItemManager.instance.weapons[0];
-        }
         //targets = new List<Character>();
         targets.Clear();
         throwables = new List<Throwable>();
-        if (weapon != null)
+        if (weapon == null)
         {
-            SetWeapon(weapon);
+            SetWeapon(0);
         }
 
         gameObject.SetActive(true);
@@ -88,6 +87,20 @@ public class Character : CharacterVisual
     internal void RemoveTarget(Character target)
     {
         targets.Remove(target);
+    }
+
+    internal void SetPursuitTarget(Character target)
+    {
+        pursuitTarget = target;
+    }
+    public Character GetPursuitTarget()
+    {
+        return pursuitTarget;
+    }
+
+    internal void RemovePursuitTarget()
+    {
+        pursuitTarget = null;
     }
 
     public Collider GetCollider()
@@ -144,7 +157,7 @@ public class Character : CharacterVisual
         {
             if (weapon != null)
             {
-                throwables.Add(weapon.Shoot(attackPos, target, this, this.transform.rotation));
+                throwables.Add(weapon.Shoot(attackPos, this, TF.rotation));
                 weapon.gameObject.SetActive(false);
             }
             if (ChangeCharacterStatus(CharacterStatus.waiting))
@@ -191,8 +204,8 @@ public class Character : CharacterVisual
         return false;
     }
 
-    public virtual void EarnCoinIfPlayer()
+    public virtual void OnKill()
     {
-
+        RemovePursuitTarget();
     }
 }

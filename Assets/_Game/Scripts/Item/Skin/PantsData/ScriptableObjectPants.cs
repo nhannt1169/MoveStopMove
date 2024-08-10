@@ -6,7 +6,6 @@ public class ScriptableObjectPants : ScriptableObject
 {
     [SerializeField] private string pantsName;
     [SerializeField] private float price;
-    [SerializeField] private Texture texture;
 
     public string GetPantsName()
     {
@@ -15,9 +14,5 @@ public class ScriptableObjectPants : ScriptableObject
     public float GetPrice()
     {
         return price;
-    }
-    public Texture GetTexture()
-    {
-        return texture;
     }
 }

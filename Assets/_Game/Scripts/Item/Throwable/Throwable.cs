@@ -5,9 +5,10 @@ public class Throwable : GameUnit
     [SerializeField] private ScriptableObjectThrowable throwableData;
     public Utils.PoolType poolType;
     private bool isMoving = false;
+    private bool isReturning = false;
     private Character owner;
     private float timer = 0;
-    [SerializeField] private Collider collider;
+    [SerializeField] private Collider throwableCollider;
     [SerializeField] private Transform throwableModel;
 
     private void FixedUpdate()
@@ -16,11 +17,16 @@ public class Throwable : GameUnit
         {
             transform.Translate(throwableData.GetSpeed() * Time.fixedDeltaTime * Vector3.forward);
         }
-
-        if (throwableData.GetWeaponThrowType() == Utils.WeaponThrowType.spinning)
+        else if (throwableData.GetWeaponThrowType() == Utils.WeaponThrowType.returning && isReturning)
         {
-            throwableModel.transform.Rotate(0, 20 * Time.fixedDeltaTime, 0);
+            TF.position = Vector3.MoveTowards(TF.position, owner.TF.position, throwableData.GetSpeed() * Time.fixedDeltaTime);
         }
+
+        if (throwableData.GetWeaponThrowType() != Utils.WeaponThrowType.straight)
+        {
+            throwableModel.transform.Rotate(0, 0, -1000 * Time.fixedDeltaTime);
+        }
+
         timer += Time.fixedDeltaTime;
 
         if (timer > 5f)
@@ -29,12 +35,18 @@ public class Throwable : GameUnit
         }
     }
 
-    public void StartMoving(Transform target, Character owner)
+    public void StartMoving(Character owner)
     {
         this.owner = owner;
         isMoving = true;
         timer = 0;
-        Physics.IgnoreCollision(collider, owner.GetCollider(), true);
+        Physics.IgnoreCollision(throwableCollider, owner.GetCollider(), true);
+    }
+
+    public void StartReturning()
+    {
+        isMoving = false;
+        isReturning = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,17 +55,25 @@ public class Throwable : GameUnit
         {
             if (other.TryGetComponent<Character>(out var target))
             {
-                OnDespawn();
+                if (throwableData.GetWeaponThrowType() == Utils.WeaponThrowType.returning)
+                {
+                    StartReturning();
+                }
+                else
+                {
+                    OnDespawn();
+                }
+
                 target.OnDeath();
                 owner.RemoveTarget(target);
-                owner.EarnCoinIfPlayer();
+                owner.OnKill();
             }
         }
     }
 
     public void OnDespawn()
     {
-        Physics.IgnoreCollision(collider, owner.GetCollider(), false);
+        Physics.IgnoreCollision(throwableCollider, owner.GetCollider(), false);
         owner.RemoveThrowable(this);
         ObjectPool.DespawnObject(this, poolType);
         timer = 0;

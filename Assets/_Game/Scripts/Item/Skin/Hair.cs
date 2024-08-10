@@ -1,18 +1,15 @@
 using UnityEngine;
 
-public class Hair : MonoBehaviour
+public class Hair : Item
 {
     [SerializeField] private ScriptableObjectHair hairData;
-    public int hairIdx;
 
-
-
-    public string GetHairName()
+    public override string GetItemName()
     {
         return hairData.GetHairName();
     }
 
-    public float GetPrice()
+    public override float GetItemPrice()
     {
         return hairData.GetPrice();
     }

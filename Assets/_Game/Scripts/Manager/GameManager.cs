@@ -23,6 +23,14 @@ public class GameManager : MonoBehaviour
         return player;
     }
 
+    public void InitPlayer()
+    {
+        var currData = DataManager.instance.currData;
+        player.SetWeapon(currData.weaponData.equippedId);
+        player.SetHair(currData.hairData.equippedId);
+        player.SetPants(currData.pantsData.equippedId);
+    }
+
     public void UpdateJoystick(Joystick joystick)
     {
         player.SetJoystick(joystick);

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwableData: {fileID: 11400000, guid: 9a3813d5e009bfa4eb35e2b63a654a8d, type: 2}
   poolType: 1
-  collider: {fileID: 6972105846315580823}
+  throwableCollider: {fileID: 6972105846315580823}
   throwableModel: {fileID: 3261980570242496460}
 --- !u!65 &6972105846315580823
 BoxCollider:

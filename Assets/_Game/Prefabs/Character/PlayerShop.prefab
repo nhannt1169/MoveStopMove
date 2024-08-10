@@ -152,6 +152,8 @@ MonoBehaviour:
   anim: {fileID: 394372812680077637}
   rb: {fileID: 7336187948307987447}
   weaponPos: {fileID: 9063072644195437404}
+  pantsMesh: {fileID: 6210001285393134764}
+  headPos: {fileID: 7335141012585473101}
 --- !u!1001 &3353388371670148901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1164,6 +1166,16 @@ PrefabInstance:
 --- !u!95 &394372812680077637 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 3353388371670148901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6210001285393134764 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -529177695146175607, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 3353388371670148901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7335141012585473101 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3800467336962686104, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
   m_PrefabInstance: {fileID: 3353388371670148901}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7778583222866840639 stripped

@@ -12,7 +12,11 @@ public class PatrolState : ICharacterState
 
     public void IUpdate(Bot bot)
     {
-
+        if (bot.GetPursuitTarget() != null)
+        {
+            bot.ChangeState(new PursuitState());
+        }
+        else
         if (bot.IsAtDestination)
         {
             bot.ChangeState(new IdleState());

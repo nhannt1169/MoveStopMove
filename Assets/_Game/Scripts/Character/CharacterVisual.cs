@@ -11,30 +11,45 @@ public class CharacterVisual : GameUnit
     [SerializeField] private Transform headPos;
     protected Hair hair;
 
-    //TODO: fix
-    public void SetWeapon(Weapon weapon)
+    public void SetWeapon(int weaponIdx)
     {
         if (this.weapon != null)
         {
             Destroy(this.weapon.gameObject);
         }
-        this.weapon = Instantiate(weapon, weaponPos);
-        this.weapon.gameObject.SetActive(true);
+
+        if (weaponIdx != -1 && weaponIdx < ItemManager.instance.weapons.Length)
+        {
+            this.weapon = Instantiate(ItemManager.instance.weapons[weaponIdx], weaponPos);
+            this.weapon.gameObject.SetActive(true);
+        }
     }
 
-    public void SetHair(Hair hair)
+    public void SetHair(int hairIdx)
     {
         if (this.hair != null)
         {
             Destroy(this.hair.gameObject);
         }
-        this.hair = Instantiate(hair, headPos);
-        this.hair.gameObject.SetActive(true);
+        if (hairIdx != -1 && hairIdx < ItemManager.instance.hairs.Length)
+        {
+            this.hair = Instantiate(ItemManager.instance.hairs[hairIdx], headPos);
+            this.hair.gameObject.SetActive(true);
+        }
     }
 
-    public void SetPants(Texture pants)
+    public void SetPants(int pantsIdx)
     {
-        pantsMesh.material.mainTexture = pants;
+        if (pantsIdx != -1 && pantsIdx < ItemManager.instance.pants.Length)
+        {
+            pantsMesh.material.mainTexture = ItemManager.instance.pants[pantsIdx].GetTexture();
+            pantsMesh.gameObject.SetActive(true);
+        }
+        else
+        {
+            pantsMesh.gameObject.SetActive(false);
+            pantsMesh.material = null;
+        }
     }
 
     protected void ChangeAnim(string animName)

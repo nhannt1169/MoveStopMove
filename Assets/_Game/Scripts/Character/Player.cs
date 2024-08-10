@@ -4,6 +4,7 @@ public class Player : Character
 {
     private Joystick joystick;
     [SerializeField] private float speed;
+    [SerializeField] private float maxHeight;
 
     // Update is called once per frame
     protected override void Update()
@@ -50,9 +51,9 @@ public class Player : Character
         }
     }
 
-    public override void OnInit(Vector3 position, Weapon weapon = null)
+    public override void OnInit(Vector3 position)
     {
-        base.OnInit(position, weapon);
+        base.OnInit(position);
     }
 
     public void SetJoystick(Joystick joystick)
@@ -69,10 +70,15 @@ public class Player : Character
         ChangeAnim(Utils.animJump);
     }
 
-    public override void EarnCoinIfPlayer()
+    public override void OnKill()
     {
-        base.EarnCoinIfPlayer();
+        base.OnKill();
         DataManager.instance.GetCurrentData().userData.coins += 10;
         DataManager.instance.SaveToJson();
+        float currHeight = TF.localScale.y;
+        if (currHeight < maxHeight)
+        {
+            TF.localScale = new Vector3(TF.localScale.x, currHeight + 0.1f, TF.localScale.z);
+        }
     }
 }
