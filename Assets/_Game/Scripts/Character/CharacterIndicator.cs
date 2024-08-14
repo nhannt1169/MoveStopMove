@@ -47,6 +47,4 @@ public class CharacterIndicator : MonoBehaviour
         var newV = Camera.main.transform.position - tf.position;
         this.tf.LookAt(tf.position - newV);
     }
-
-
 }

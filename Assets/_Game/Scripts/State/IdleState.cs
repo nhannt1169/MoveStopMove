@@ -21,7 +21,14 @@ public class IdleState : ICharacterState
         {
             if (!bot.CheckTargetsInRange())
             {
-                bot.ChangeState(new PatrolState());
+                if (bot.GetPursuitTarget() != null)
+                {
+                    bot.ChangeState(new PursuitState());
+                }
+                else
+                {
+                    bot.ChangeState(new PatrolState());
+                }
             }
             timer = 0;
         }

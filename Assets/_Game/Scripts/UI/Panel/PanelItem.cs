@@ -1,16 +1,12 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class PanelItem : MonoBehaviour, IDragHandler, IEndDragHandler
+public class PanelItem : MonoBehaviour
 {
     [SerializeField] private ButtonItem[] itemButtons;
     private Vector3 panelPosition;
-    public float percentThreshold = 0.2f;
-    private float difference;
     private void Start()
     {
         panelPosition = transform.position;
-        Debug.Log(panelPosition.x + "-" + panelPosition.y + "-" + panelPosition.z);
     }
 
     public void UpdateAllItemStatus()
@@ -48,32 +44,32 @@ public class PanelItem : MonoBehaviour, IDragHandler, IEndDragHandler
         gameObject.SetActive(false);
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        difference = difference + (eventData.pressPosition.x - eventData.position.x) / 1000;
-        transform.position = new Vector3(panelPosition.x - difference, panelPosition.y, panelPosition.z);
-    }
+    //public void OnDrag(PointerEventData eventData)
+    //{
+    //    difference = difference + (eventData.pressPosition.x - eventData.position.x) / 1000;
+    //    transform.position = new Vector3(panelPosition.x - difference, panelPosition.y, panelPosition.z);
+    //}
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        float percentage = (eventData.pressPosition.x - eventData.position.x) / Screen.width;
-        if (Mathf.Abs(percentage) >= percentThreshold)
-        {
-            Vector3 newPosition = panelPosition;
-            if (percentage > 0)
-            {
-                newPosition += new Vector3(-Screen.width, 0, 0);
-            }
-            else if (percentage < 0)
-            {
-                newPosition += new Vector3(Screen.width, 0, 0);
-            }
-            transform.position = newPosition;
-            panelPosition = newPosition;
-        }
-        else
-        {
-            transform.position = panelPosition;
-        }
-    }
+    //public void OnEndDrag(PointerEventData eventData)
+    //{
+    //    float percentage = (eventData.pressPosition.x - eventData.position.x) / Screen.width;
+    //    if (Mathf.Abs(percentage) >= percentThreshold)
+    //    {
+    //        Vector3 newPosition = panelPosition;
+    //        if (percentage > 0)
+    //        {
+    //            newPosition += new Vector3(-Screen.width, 0, 0);
+    //        }
+    //        else if (percentage < 0)
+    //        {
+    //            newPosition += new Vector3(Screen.width, 0, 0);
+    //        }
+    //        transform.position = newPosition;
+    //        panelPosition = newPosition;
+    //    }
+    //    else
+    //    {
+    //        transform.position = panelPosition;
+    //    }
+    //}
 }
