@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 7778583222866840639}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6307863593938720718
 MeshFilter:
@@ -154,6 +154,8 @@ MonoBehaviour:
   weaponPos: {fileID: 9063072644195437404}
   pantsMesh: {fileID: 6210001285393134764}
   headPos: {fileID: 7335141012585473101}
+  skinnedMeshRenderer: {fileID: 3012704510043042255}
+  colorData: {fileID: 11400000, guid: 62ffc9c0f09cff543bbca99643386ab8, type: 2}
 --- !u!1001 &3353388371670148901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1166,6 +1168,11 @@ PrefabInstance:
 --- !u!95 &394372812680077637 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 3353388371670148901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3012704510043042255 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8699012472884554006, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
   m_PrefabInstance: {fileID: 3353388371670148901}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &6210001285393134764 stripped

@@ -33,7 +33,7 @@ public class Player : Character
 
     private void FixedUpdate()
     {
-        if (joystick == null)
+        if (joystick == null || characterStatus == Utils.CharacterStatus.dead)
         {
             return;
         }

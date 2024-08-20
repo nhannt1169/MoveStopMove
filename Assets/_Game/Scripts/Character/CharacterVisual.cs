@@ -9,6 +9,8 @@ public class CharacterVisual : GameUnit
     protected string currentAnimName;
     [SerializeField] private Renderer pantsMesh;
     [SerializeField] private Transform headPos;
+    [SerializeField] private SkinnedMeshRenderer characterSkin;
+    [SerializeField] protected ScriptableObjectColor colorData;
     protected Hair hair;
 
     public void SetWeapon(int weaponIdx)
@@ -40,15 +42,13 @@ public class CharacterVisual : GameUnit
 
     public void SetPants(int pantsIdx)
     {
+        pantsMesh.gameObject.SetActive(false);
+        pantsMesh.material = null;
+
         if (pantsIdx != -1 && pantsIdx < ItemManager.instance.pants.Length)
         {
             pantsMesh.material.mainTexture = ItemManager.instance.pants[pantsIdx].GetTexture();
             pantsMesh.gameObject.SetActive(true);
-        }
-        else
-        {
-            pantsMesh.gameObject.SetActive(false);
-            pantsMesh.material = null;
         }
     }
 
@@ -65,5 +65,17 @@ public class CharacterVisual : GameUnit
 
             anim.SetTrigger(currentAnimName);
         }
+    }
+
+    protected void SetSkinColor(Material mat)
+    {
+        characterSkin.material = mat;
+    }
+
+    protected void RandomizeAppearance()
+    {
+        SetPants(Random.Range(0, ItemManager.instance.pants.Length));
+        SetHair(Random.Range(0, ItemManager.instance.hairs.Length));
+        SetSkinColor(colorData.GetRandomMaterial());
     }
 }

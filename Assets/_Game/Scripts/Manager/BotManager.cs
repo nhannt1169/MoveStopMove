@@ -31,7 +31,7 @@ public class BotManager : MonoBehaviour
     {
         foreach (Bot bot in bots)
         {
-            Destroy(bot);
+            Destroy(bot.gameObject);
         }
         bots.Clear();
     }

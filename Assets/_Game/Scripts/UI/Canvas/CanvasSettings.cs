@@ -7,7 +7,7 @@ public class CanvasSettings : UICanvas
         UIManager.instance.OpenUI<CanvasMainMenu>();
     }
 
-    public void ContinueButton()
+    public void ResumeButton()
     {
         Close(0);
     }

@@ -56,6 +56,7 @@ public class Bot : Character
     public override void OnInit(Vector3 position)
     {
         base.OnInit(position);
+        RandomizeAppearance();
         ChangeState(new IdleState());
     }
 
@@ -89,15 +90,5 @@ public class Bot : Character
     {
         base.OnDeath();
         BotManager.instance.RemoveBot(this);
-    }
-
-    private void OnBecameInvisible()
-    {
-        Debug.Log("here");
-    }
-
-    private void OnBecameVisible()
-    {
-
     }
 }

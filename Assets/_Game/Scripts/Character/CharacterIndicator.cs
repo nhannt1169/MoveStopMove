@@ -19,6 +19,8 @@ public class CharacterIndicator : MonoBehaviour
         Vector3 screenPos = Camera.main.WorldToScreenPoint(owner.transform.position);
         bool isOffScreen = screenPos.x <= borderSize || screenPos.x >= Screen.width || screenPos.y <= borderSize || screenPos.y >= Screen.height;
 
+        //tf.localEulerAngles = new Vector3(0, 0, 180f);
+
         if (isOffScreen)
         {
             if (screenPos.x <= borderSize)
@@ -38,12 +40,15 @@ public class CharacterIndicator : MonoBehaviour
                 screenPos.y = Screen.height - borderSize;
             }
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-            this.transform.position = new Vector3(worldPos.x, 1f, worldPos.z);
+            tf.position = new Vector3(worldPos.x, 1f, worldPos.z);
+
+            //tf.localEulerAngles = new Vector3(0, 100f, 100f);
         }
         else
         {
             transform.localPosition = initPos;
         }
+
         var newV = Camera.main.transform.position - tf.position;
         this.tf.LookAt(tf.position - newV);
     }
