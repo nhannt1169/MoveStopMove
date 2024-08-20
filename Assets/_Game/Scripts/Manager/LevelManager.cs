@@ -62,9 +62,16 @@ public class LevelManager : MonoBehaviour
         currLevel.DestoyCurrLevel();
     }
 
-    public void OnWin(Vector3 position)
+    public void OnWin()
     {
         BotManager.instance.ClearBots();
-        GameManager.instance.GetPlayer().Win(position);
+        //GameManager.instance.GetPlayer().Win(position);
+    }
+
+    public void OnLose()
+    {
+        BotManager.instance.ClearBots();
+        UIManager.instance.CloseAllUI();
+        UIManager.instance.OpenUI<CanvasDefeat>();
     }
 }

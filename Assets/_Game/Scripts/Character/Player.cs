@@ -81,4 +81,11 @@ public class Player : Character
             TF.localScale = new Vector3(TF.localScale.x, currHeight + 0.1f, TF.localScale.z);
         }
     }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        this.TF.position = new Vector3(0, 0, 0);
+        LevelManager.instance.OnLose();
+    }
 }
