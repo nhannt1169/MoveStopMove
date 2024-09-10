@@ -31,13 +31,22 @@ public class CanvasShop : UICanvas
         AssignCamera(CameraManager.instance.GetUICam());
         coinText.text = DataManager.instance.currData.userData.coins + " Coins";
         ChangePanelVisibilityWeapon();
+        ResetAllStatus();
+    }
+
+    public void ResetAllStatus()
+    {
         chosenWeapon = null;
         chosenHair = null;
+        chosenPants = null;
         errorText.gameObject.SetActive(false);
         weaponPanel.UpdateAllItemStatus();
         hairPanel.UpdateAllItemStatus();
         pantsPanel.UpdateAllItemStatus();
+        buyButton.gameObject.SetActive(false);
+        equipButton.gameObject.SetActive(false);
     }
+
     private void AssignCamera(Camera camera)
     {
         canvas.worldCamera = camera;

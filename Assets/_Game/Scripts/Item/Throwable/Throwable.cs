@@ -40,7 +40,10 @@ public class Throwable : GameUnit
         this.owner = owner;
         isMoving = true;
         timer = 0;
-        Physics.IgnoreCollision(throwableCollider, owner.GetCollider(), true);
+        if (owner != null)
+        {
+            Physics.IgnoreCollision(throwableCollider, owner.GetCollider(), true);
+        }
     }
 
     public void StartReturning()
@@ -73,8 +76,11 @@ public class Throwable : GameUnit
 
     public void OnDespawn()
     {
-        Physics.IgnoreCollision(throwableCollider, owner.GetCollider(), false);
-        owner.RemoveThrowable(this);
+        if (owner != null)
+        {
+            Physics.IgnoreCollision(throwableCollider, owner.GetCollider(), false);
+            owner.RemoveThrowable(this);
+        }
         ObjectPool.DespawnObject(this, poolType);
         timer = 0;
     }

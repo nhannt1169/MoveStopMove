@@ -29,6 +29,6 @@ public class CanvasDefeat : UICanvas
 
     public void UpdateRankText()
     {
-        rankText.text = "#" + (BotManager.instance.GetBotCount() + 1).ToString();
+        rankText.text = "#" + (BotManager.instance.survivorCount + 1).ToString();
     }
 }

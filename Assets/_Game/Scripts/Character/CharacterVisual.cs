@@ -11,6 +11,7 @@ public class CharacterVisual : GameUnit
     [SerializeField] private Transform headPos;
     [SerializeField] private SkinnedMeshRenderer characterSkin;
     [SerializeField] protected ScriptableObjectColor colorData;
+    [SerializeField] protected float initHeight;
     protected Hair hair;
 
     public void SetWeapon(int weaponIdx)

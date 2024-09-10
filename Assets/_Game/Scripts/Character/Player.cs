@@ -54,6 +54,7 @@ public class Player : Character
     public override void OnInit(Vector3 position)
     {
         base.OnInit(position);
+        TF.localScale = new Vector3(TF.localScale.x, initHeight, TF.localScale.z);
     }
 
     public void SetJoystick(Joystick joystick)
@@ -85,7 +86,6 @@ public class Player : Character
     public override void OnDeath()
     {
         base.OnDeath();
-        this.TF.position = new Vector3(0, 0, 0);
         LevelManager.instance.OnLose();
     }
 }

@@ -52,6 +52,7 @@ public class Character : CharacterVisual
         {
             SetWeapon(0);
         }
+        ChangeCharacterStatus(CharacterStatus.idle, true);
 
         gameObject.SetActive(true);
     }
@@ -65,6 +66,7 @@ public class Character : CharacterVisual
         {
             throwable.OnDespawn();
         }
+        throwables.Clear();
         Invoke(nameof(OnDespawn), 2f);
     }
 
@@ -108,9 +110,9 @@ public class Character : CharacterVisual
         return collider;
     }
 
-    protected bool ChangeCharacterStatus(Utils.CharacterStatus characterStatus)
+    protected bool ChangeCharacterStatus(Utils.CharacterStatus characterStatus, bool isRevived = false)
     {
-        if (IsDead)
+        if (IsDead && !isRevived)
         {
             return false;
         }

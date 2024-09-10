@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 4877238156109120463}
   - component: {fileID: 8785243296356786426}
   m_Layer: 5
-  m_Name: ButtonResume
+  m_Name: ButtonRestart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -604,7 +604,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6364173490936463072}
         m_TargetAssemblyTypeName: CanvasDefeat, Assembly-CSharp
-        m_MethodName: ResumeButton
+        m_MethodName: RestartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -783,7 +783,7 @@ RectTransform:
   m_Children:
   - {fileID: 1916744704653576565}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

@@ -57,21 +57,22 @@ public class LevelManager : MonoBehaviour
 
         PoolManager.instance.DestroyAllPools();
 
-        BotManager.instance.ClearBots();
+        BotManager.instance.DisableAllBots();
 
         currLevel.DestoyCurrLevel();
     }
 
     public void OnWin()
     {
-        BotManager.instance.ClearBots();
-        //GameManager.instance.GetPlayer().Win(position);
+        //DestroyCurrLevel();
+        BotManager.instance.DisableAllBots();
     }
 
     public void OnLose()
     {
-        BotManager.instance.ClearBots();
         UIManager.instance.CloseAllUI();
         UIManager.instance.OpenUI<CanvasDefeat>();
+        BotManager.instance.DisableAllBots();
+        //DestroyCurrLevel();
     }
 }

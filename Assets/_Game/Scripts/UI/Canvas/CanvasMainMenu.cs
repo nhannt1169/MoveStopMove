@@ -4,6 +4,12 @@ using UnityEngine;
 public class CanvasMainMenu : UICanvas
 {
     [SerializeField] private TMP_Dropdown dropdown;
+
+    public override void Open()
+    {
+        base.Open();
+        GameManager.instance.GetPlayer().TF.position = Vector3.zero;
+    }
     public void StartButton()
     {
         Close(0);

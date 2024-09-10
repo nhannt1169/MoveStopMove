@@ -17,6 +17,10 @@ public class Weapon : Item
 
     internal Throwable Shoot(Transform attackPos, Character owner, Quaternion rotation)
     {
+        if (owner == null)
+        {
+            return null;
+        }
         Throwable throwable = (Throwable)ObjectPool.SpawnObject(attackPos.position, rotation, poolType, null);
         throwable.StartMoving(owner);
         return throwable;

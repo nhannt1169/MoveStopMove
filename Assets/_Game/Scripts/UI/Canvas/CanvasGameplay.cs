@@ -23,6 +23,6 @@ public class CanvasGameplay : UICanvas
 
     public void UpdateSurviorCount()
     {
-        survivorCountText.text = "Surviors: " + (BotManager.instance.GetBotCount() + 1).ToString();
+        survivorCountText.text = "Surviors: " + (BotManager.instance.survivorCount + 1).ToString();
     }
 }
